@@ -36,8 +36,8 @@ form.search input {
 }
 
 .photos img {
-  width: 380px;
-  margin: auto;
+  width: 420px;
+  /* margin: auto; */
   object-fit: cover;
   height: 500px;
 }
