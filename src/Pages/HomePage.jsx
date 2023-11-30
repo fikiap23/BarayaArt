@@ -77,8 +77,8 @@ const HomePage = ({ comName }) => {
             </div>
           }
         </div>
-        <div className="wrapper">
-          <div className=" flex items-center sm:w-[100%] m-auto md:w-[100%] lg:w-[1170px] flex-wrap gap-3 justify-center">
+        <div className="mx-auto">
+          <div className=" w-full m-auto grid grid-cols-3 items-center  gap-3 justify-center">
             {photos?.map((photo) => (
               <div key={photo?.id} className="photos">
                 <img

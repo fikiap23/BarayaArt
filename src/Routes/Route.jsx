@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
+import Home from '../components/Home/Home'
 
 import HomePage from '../Pages/HomePage'
 import ProfilePage from '../Pages/ProfilePage'
@@ -6,8 +7,12 @@ import ProfilePage from '../Pages/ProfilePage'
 const Route = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage comName="Random" />,
+    element: <Home />,
     children: [
+      {
+        path: '/',
+        element: <HomePage comName="Random" />,
+      },
       {
         path: '/following',
         element: <HomePage comName="people" />,
