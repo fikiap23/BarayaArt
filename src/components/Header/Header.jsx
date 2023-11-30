@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Header.css'
 import { FaUserCircle } from 'react-icons/fa'
-
+import logoImage from '../../assets/logo.png'
 const Header = ({ fetchReq }) => {
   const [search, setSearch] = useState('')
   const [activeItem, setActiveItem] = useState(0)
@@ -22,13 +22,14 @@ const Header = ({ fetchReq }) => {
   }
 
   return (
-    <div className="header">
-      <div className="headerTop">
+    <div className="pl-5">
+      <div className="flex justify-between items-center w-full">
         <div className="logo">
-          <img src="./img/logo.png" alt="logo" />
+          <img src={logoImage} alt="logo" />
           <div className="search">
             <form onSubmit={handleSubmit} className="search">
               <input
+                className="outline-none rounded-[50px] ml-[15px] px-[7px] py-[15px]"
                 id="top"
                 onChange={inputValue}
                 placeholder="Photos, people, or groups"
@@ -37,6 +38,7 @@ const Header = ({ fetchReq }) => {
             </form>
           </div>
         </div>
+
         <div className="flex gap-5">
           <div className="md:flex align-center hidden ">
             <button>Adversite</button>
@@ -48,7 +50,7 @@ const Header = ({ fetchReq }) => {
         </div>
       </div>
 
-      <ul>
+      <ul className="flex justify-between w-[1170px] p-[4px]">
         <li
           className={activeItem === 0 ? 'active' : ''}
           onClick={() => handleItemClick(0)}

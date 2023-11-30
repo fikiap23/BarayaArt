@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react'
-import Header from './Header/Header'
-import Popup from './Popup/Popup'
+import Header from '../components/Header/Header'
+import Popup from '../components/Popup/Popup'
 
-const PhotoCart = ({ comName }) => {
+const HomePage = ({ comName }) => {
   const [photos, setPhotos] = useState([])
   const [popupArry, setPopupArry] = useState([])
   const [toggle, setToggle] = useState(false)
@@ -58,7 +58,7 @@ const PhotoCart = ({ comName }) => {
   return (
     <>
       <div className="app">
-        <div className="wrapper">
+        <div className="">
           <Header fetchReq={fetchReq} />
         </div>
         <div className="hero">
@@ -114,4 +114,4 @@ const PhotoCart = ({ comName }) => {
   )
 }
 
-export default PhotoCart
+export default HomePage
