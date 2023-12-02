@@ -52,87 +52,89 @@ const Header = ({ fetchReq }) => {
         </div>
       </div>
 
-      <ul className="flex justify-between w-[1170px] p-[4px]">
-        <li
-          className={activeItem === 0 ? 'active' : ''}
-          onClick={() => handleItemClick(0)}
-        >
-          <Link to="/">Editorial</Link>
-        </li>
-        <li
-          className={activeItem === 1 ? 'active' : ''}
-          onClick={() => handleItemClick(1)}
-        >
-          <Link to="/following">Following</Link>
-        </li>
-        <li>|</li>
-        <li
-          className={activeItem === 2 ? 'active' : ''}
-          onClick={() => handleItemClick(2)}
-        >
-          <Link to="/ai_art">AI Art</Link>
-        </li>
-        <li
-          className={activeItem === 3 ? 'active' : ''}
-          onClick={() => handleItemClick(3)}
-        >
-          <Link to="/wallpaper">Wallpaper</Link>
-        </li>
-        <li
-          className={activeItem === 4 ? 'active' : ''}
-          onClick={() => handleItemClick(4)}
-        >
-          <Link to="/3dranders">3D Renders</Link>
-        </li>
-        <li
-          className={activeItem === 5 ? 'active' : ''}
-          onClick={() => handleItemClick(5)}
-        >
-          <Link to="/travel">Travel</Link>
-        </li>
-        <li
-          className={activeItem === 6 ? 'active' : ''}
-          onClick={() => handleItemClick(6)}
-        >
-          <Link to="/nature">Nature</Link>
-        </li>
-        <li
-          className={activeItem === 7 ? 'active' : ''}
-          onClick={() => handleItemClick(7)}
-        >
-          <Link to="/streetphotography">Street Photography</Link>
-        </li>
-        <li
-          className={activeItem === 8 ? 'active' : ''}
-          onClick={() => handleItemClick(8)}
-        >
-          <Link to="/experimental">Experimental</Link>
-        </li>
-        <li
-          className={activeItem === 9 ? 'active' : ''}
-          onClick={() => handleItemClick(9)}
-        >
-          <Link to="/textures-patterns">Textures & Patterns</Link>
-        </li>
-        <li
-          className={activeItem === 10 ? 'active' : ''}
-          onClick={() => handleItemClick(10)}
-        >
-          <Link to="/animals">Animals</Link>
-        </li>
-        <li
-          className={activeItem === 11 ? 'active' : ''}
-          onClick={() => handleItemClick(11)}
-        >
-          <Link to="/architecture-interiors">Architecture & Interiors</Link>
-        </li>
-        <li
-          className={activeItem === 12 ? 'active' : ''}
-          onClick={() => handleItemClick(12)}
-        >
-          <Link to="/fashion-beauty">Fashion & Beauty</Link>
-        </li>
-      </ul>
+      <div className="overflow-x-auto">
+        <ul className="flex justify-between w-[1170px] p-[4px]">
+          <li
+            className={activeItem === 0 ? 'active' : ''}
+            onClick={() => handleItemClick(0)}
+          >
+            <Link to="/">Editorial</Link>
+          </li>
+          <li
+            className={activeItem === 1 ? 'active' : ''}
+            onClick={() => handleItemClick(1)}
+          >
+            <Link to="/following">Following</Link>
+          </li>
+          <li>|</li>
+          <li
+            className={activeItem === 2 ? 'active' : ''}
+            onClick={() => handleItemClick(2)}
+          >
+            <Link to="/ai_art">AI Art</Link>
+          </li>
+          <li
+            className={activeItem === 3 ? 'active' : ''}
+            onClick={() => handleItemClick(3)}
+          >
+            <Link to="/wallpaper">Wallpaper</Link>
+          </li>
+          <li
+            className={activeItem === 4 ? 'active' : ''}
+            onClick={() => handleItemClick(4)}
+          >
+            <Link to="/3dranders">3D Renders</Link>
+          </li>
+          <li
+            className={activeItem === 5 ? 'active' : ''}
+            onClick={() => handleItemClick(5)}
+          >
+            <Link to="/travel">Travel</Link>
+          </li>
+          <li
+            className={activeItem === 6 ? 'active' : ''}
+            onClick={() => handleItemClick(6)}
+          >
+            <Link to="/nature">Nature</Link>
+          </li>
+          <li
+            className={activeItem === 7 ? 'active' : ''}
+            onClick={() => handleItemClick(7)}
+          >
+            <Link to="/streetphotography">Street Photography</Link>
+          </li>
+          <li
+            className={activeItem === 8 ? 'active' : ''}
+            onClick={() => handleItemClick(8)}
+          >
+            <Link to="/experimental">Experimental</Link>
+          </li>
+          <li
+            className={activeItem === 9 ? 'active' : ''}
+            onClick={() => handleItemClick(9)}
+          >
+            <Link to="/textures-patterns">Textures & Patterns</Link>
+          </li>
+          <li
+            className={activeItem === 10 ? 'active' : ''}
+            onClick={() => handleItemClick(10)}
+          >
+            <Link to="/animals">Animals</Link>
+          </li>
+          <li
+            className={activeItem === 11 ? 'active' : ''}
+            onClick={() => handleItemClick(11)}
+          >
+            <Link to="/architecture-interiors">Architecture & Interiors</Link>
+          </li>
+          <li
+            className={activeItem === 12 ? 'active' : ''}
+            onClick={() => handleItemClick(12)}
+          >
+            <Link to="/fashion-beauty">Fashion & Beauty</Link>
+          </li>
+        </ul>
+      </div>
     </div>
   )
 }
