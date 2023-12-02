@@ -46,7 +46,10 @@ const Header = ({ fetchReq }) => {
           </div>
           <div className="items-center user md:flex align-center hidden">
             <button>Submit a photo</button>
-            <FaUserCircle className="text-[35px] text-[#bebebe] ml-[20px]" />
+            <Link to="/u/user">
+              {' '}
+              <FaUserCircle className="text-[35px] text-[#bebebe] ml-[20px]" />
+            </Link>
           </div>
           <IoMenu className="text-[35px] lg:flex align-center hidden" />
         </div>
