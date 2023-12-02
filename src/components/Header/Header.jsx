@@ -23,7 +23,7 @@ const Header = ({ fetchReq }) => {
   }
 
   return (
-    <div className="px-8">
+    <div className="px-8  mb-3 md:mb-5">
       <div className="flex justify-between items-center w-full">
         <div className="w-[45px] flex items-center">
           <img src={logoImage} alt="logo" />
