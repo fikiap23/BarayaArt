@@ -1,12 +1,14 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 // Gallery.js
+import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
 
 const PhotoGallery = ({ photos, handlePopup }) => {
   return (
-    <div className="mx-auto">
-      <div className="w-full m-auto grid grid-cols-1 md:grid-cols-3 items-center gap-3 justify-center">
+    <ResponsiveMasonry columnsCountBreakPoints={{ 0: 1, 576: 2, 768: 3 }}>
+      <Masonry gutter="10px">
         {photos?.map((photo) => (
-          <div key={photo?.id} className="photos">
+          <div key={photo?.id}>
             <img
               id={photo?.id}
               onClick={handlePopup}
@@ -17,8 +19,8 @@ const PhotoGallery = ({ photos, handlePopup }) => {
             />
           </div>
         ))}
-      </div>
-    </div>
+      </Masonry>
+    </ResponsiveMasonry>
   )
 }
 
