@@ -2,6 +2,7 @@
 
 import './Popup.css'
 import { saveAs } from 'file-saver'
+import { Link } from 'react-router-dom'
 
 const Popup = ({ handlePopup }) => {
   const downloadImage = (image_url, image_name) => {
@@ -33,13 +34,15 @@ const Popup = ({ handlePopup }) => {
               Download
             </button>
           </div>
-          <div className="userInfo">
-            <img src={handlePopup?.user?.profile_image?.medium} alt="user" />
-            <div>
-              <b>{handlePopup?.user?.name}</b>
-              <p>{handlePopup?.user?.username}</p>
+          <Link to={`/u/${handlePopup?.user?.username}`}>
+            <div className="userInfo">
+              <img src={handlePopup?.user?.profile_image?.medium} alt="user" />
+              <div>
+                <b>{handlePopup?.user?.name}</b>
+                <p>{handlePopup?.user?.username}</p>
+              </div>
             </div>
-          </div>
+          </Link>
           <div className="additionalInfo p-4 border-t border-gray-300 w-full">
             <p className="text-gray-700">
               <span className="font-bold">Likes:</span> {handlePopup?.likes}
