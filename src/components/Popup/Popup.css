@@ -12,10 +12,16 @@
   width: 50px;
 }
 
-.downloadImage {
+.closeBtn {
   position: absolute;
   top: 20px;
   right: 20px;
+  padding: 6px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.downloadBtn {
   padding: 6px 15px;
   border: 1px solid #ccc;
   border-radius: 5px;

@@ -4,7 +4,7 @@ import './Popup.css'
 import { saveAs } from 'file-saver'
 import { Link } from 'react-router-dom'
 
-const Popup = ({ handlePopup }) => {
+const Popup = ({ handlePopup, handleHide }) => {
   const downloadImage = (image_url, image_name) => {
     saveAs(image_url, image_name) // Put your image URL here.
   }
@@ -12,7 +12,7 @@ const Popup = ({ handlePopup }) => {
   return (
     <div>
       {handlePopup?.id && (
-        <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[380px] h-[630px] bg-white p-[10px] m-auto flex flex-col items-center rounded-[4px] z-10 overflow-auto md:w-[1000px] md:h-[636px]">
+        <div className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full h-full bg-white p-[10px] m-auto flex flex-col items-center rounded-[4px] z-10 overflow-auto  ">
           <div>
             <img
               className=" w-[400px] h-[500px] object-contain"
@@ -20,18 +20,13 @@ const Popup = ({ handlePopup }) => {
               alt={handlePopup?.description}
             />
           </div>
-          <div className="downloadImage">
+          <div className="closeBtn">
             <button
               className="downloadButton"
-              title="Download photo"
-              onClick={() =>
-                downloadImage(
-                  handlePopup?.urls?.regular,
-                  handlePopup?.description
-                )
-              }
+              title="close"
+              onClick={() => handleHide()}
             >
-              Download
+              X
             </button>
           </div>
           <Link to={`/u/${handlePopup?.user?.username}`}>
@@ -44,6 +39,20 @@ const Popup = ({ handlePopup }) => {
             </div>
           </Link>
           <div className="additionalInfo p-4 border-t border-gray-300 w-full">
+            <div className="downloadBtn w-fit ">
+              <button
+                className="downloadButton"
+                title="close"
+                onClick={() =>
+                  downloadImage(
+                    handlePopup?.urls?.regular,
+                    handlePopup?.description
+                  )
+                }
+              >
+                Download
+              </button>
+            </div>
             <p className="text-gray-700">
               <span className="font-bold">Likes:</span> {handlePopup?.likes}
             </p>

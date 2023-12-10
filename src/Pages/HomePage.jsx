@@ -134,8 +134,8 @@ const HomePage = ({ comName }) => {
       <PhotoGallery photos={photos} handlePopup={handlePopup} />
       {loading && <p>Loading...</p>}
       {toggle && (
-        <div onClick={handleHide} className="popudp">
-          <Popup handlePopup={popupArry} />
+        <div className="popudp">
+          <Popup handlePopup={popupArry} handleHide={handleHide} />
         </div>
       )}
 
