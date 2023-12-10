@@ -68,7 +68,7 @@ const ProfilePage = () => {
         }}
       >
         <div className="flex items-center gap-5 relative top-[80px] left-0  md:top-[180px] md:left-[130px] w-fit text-white font-medium">
-          <div className="w-[100px] h-[100px] md:w-[140px] md:h-[140px] overflow-hidden bg-[#686868] rounded-full shadow-xl shadow-black">
+          <div className="w-[80px] h-[80px] md:w-[140px] md:h-[140px] overflow-hidden bg-[#686868] rounded-full shadow-xl shadow-black">
             <img
               src={usernameData?.profile_image?.large}
               alt="avatar"
@@ -76,8 +76,8 @@ const ProfilePage = () => {
             />
           </div>
           <div>
-            <h1 className="text-3xl">{usernameData?.name}</h1>
-            <div className="flex fl gap-8">
+            <h1 className="text-xl md:text-3xl">{usernameData?.name}</h1>
+            <div className="flex  gap-2 md:gap-4 lg:gap-8">
               <p>@{usernameData?.username}</p>
               <p>{usernameData?.followers_count} Followers</p>
               <p>{usernameData?.following_count} Following</p>
