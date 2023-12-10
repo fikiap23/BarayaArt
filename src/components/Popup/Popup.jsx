@@ -1,5 +1,6 @@
-import React from "react";
-import "./Popup.css";
+/* eslint-disable react/prop-types */
+
+import './Popup.css'
 
 const Popup = ({ handlePopup }) => {
   return (
@@ -34,7 +35,7 @@ const Popup = ({ handlePopup }) => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Popup;
+export default Popup
