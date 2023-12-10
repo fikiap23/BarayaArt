@@ -3,9 +3,13 @@
 import { useState } from 'react'
 import { GoDownload } from 'react-icons/go'
 import Masonry, { ResponsiveMasonry } from 'react-responsive-masonry'
+import { saveAs } from 'file-saver'
 
 const PhotoGallery = ({ photos, handlePopup }) => {
   const [hoveredPhoto, setHoveredPhoto] = useState(null)
+  const downloadImage = (image_url, image_name) => {
+    saveAs(image_url, image_name) // Put your image URL here.
+  }
 
   return (
     <ResponsiveMasonry columnsCountBreakPoints={{ 0: 1, 576: 2, 768: 3 }}>
@@ -40,7 +44,12 @@ const PhotoGallery = ({ photos, handlePopup }) => {
                     <p className="text-white font-bold">{photo?.user?.name}</p>
                   </div>
                   <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center cursor-pointer mr-[30px]">
-                    <GoDownload className="text-black text-3xl" />
+                    <GoDownload
+                      className="text-black text-3xl"
+                      onClick={() =>
+                        downloadImage(photo?.urls?.regular, photo?.description)
+                      }
+                    />
                   </div>
                 </div>
               </div>
