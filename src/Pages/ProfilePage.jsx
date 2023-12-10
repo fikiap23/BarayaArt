@@ -1,98 +1,54 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react'
 import { MdKeyboardDoubleArrowUp } from 'react-icons/md'
+import { useParams } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import PhotoGallery from '../components/PhotoGallery/PhotoGallery'
 import Popup from '../components/Popup/Popup'
+import bg from '../assets/bg.jpeg'
 
-const ProfilePage = ({ comName }) => {
+const ProfilePage = () => {
   const [photos, setPhotos] = useState([])
   const [popupArry, setPopupArry] = useState([])
   const [toggle, setToggle] = useState(false)
   const [loading, setLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
   const [showScrollToTop, setShowScrollToTop] = useState(false)
-
-  let featured = comName
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
-
-  const handleScroll = () => {
-    setShowScrollToTop(window.scrollY > 200)
-  }
+  const { username } = useParams()
+  const [usernameData, setUsernameData] = useState({})
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    const fetchUser = async () => {
+      const response = await fetch(
+        `https://api.unsplash.com/users/${username}?client_id=7rZCr4g4T9pmpdZ9Chw8B60qfv6PotjqGkXE6uMAUyM`
+      )
+      const data = await response.json()
 
-  useEffect(() => {
-    document.title = 'Beautiful Free Image & Picture'
-    fetchRequest()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [comName])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 200 &&
-        !loading
-      ) {
-        loadMoreData()
-      }
+      setUsernameData(data)
     }
 
-    window.addEventListener('scroll', handleScroll)
+    fetchUser()
+  }, [username])
 
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [loading])
-
-  const loadMoreData = async () => {
+  const fetchMoreData = async () => {
     setLoading(true)
+    const nextPage = currentPage + 1
 
     try {
-      const newData = await fetchNewData()
-      setPhotos((prevPhotos) => [...prevPhotos, ...newData])
-      setCurrentPage((prevPage) => prevPage + 1)
+      const url = `https://api.unsplash.com/users/${username}/photos?page=${nextPage}&per_page=100&client_id=7rZCr4g4T9pmpdZ9Chw8B60qfv6PotjqGkXE6uMAUyM`
+      const response = await fetch(url)
+      const newData = await response.json()
+      console.log(newData)
+
+      if (newData.length > 0) {
+        setPhotos((prevPhotos) => [...prevPhotos, ...newData])
+        setCurrentPage(nextPage)
+      }
     } catch (error) {
-      console.error('Error fetching new data', error)
+      console.error('Error fetching more data', error)
     } finally {
       setLoading(false)
     }
-  }
-
-  const fetchRequest = async () => {
-    const url = `https://api.unsplash.com/search/photos?page=1&per_page=30&query=${featured}&client_id=7rZCr4g4T9pmpdZ9Chw8B60qfv6PotjqGkXE6uMAUyM`
-
-    try {
-      const data = await fetch(url)
-      const dataJ = await data.json()
-      const result = dataJ.results
-      setPhotos(result)
-    } catch (error) {
-      console.error('Error fetching data', error)
-    }
-  }
-
-  const fetchNewData = async () => {
-    const newUrl = `https://api.unsplash.com/search/photos?page=${
-      currentPage + 1
-    }&per_page=30&query=${featured}&client_id=7rZCr4g4T9pmpdZ9Chw8B60qfv6PotjqGkXE6uMAUyM`
-    const response = await fetch(newUrl)
-    const data = await response.json()
-    return data.results
-  }
-
-  const fetchReq = (inputValue) => {
-    featured = inputValue
-    setCurrentPage(1)
-    fetchRequest()
   }
 
   const handlePopup = (event) => {
@@ -105,19 +61,55 @@ const ProfilePage = ({ comName }) => {
   const handleHide = () => {
     setToggle(false)
   }
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      fetchMoreData()
+    }
+
+    setShowScrollToTop(document.documentElement.scrollTop > 100)
+  }
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    })
+  }
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
   return (
     <>
-      <Header fetchReq={fetchReq} />
+      <Header />
       {/* Hero Start*/}
-      <div className="w-full h-[200px] md:h-[350px] bg-[#D9D9D9]">
-        <div className="flex items-center gap-5 relative top-[80px] left-0  md:top-[180px] md:left-[130px]">
-          <div className="w-[100px] h-[100px] md:w-[140px] md:h-[140px] overflow-hidden bg-[#686868] rounded-full  "></div>
+      <div
+        className="w-full h-[200px] md:h-[350px] bg-cover bg-center bg-no-repeat hero_bannar "
+        style={{
+          backgroundImage: `url(${bg})`,
+        }}
+      >
+        <div className="flex items-center gap-5 relative top-[80px] left-0  md:top-[180px] md:left-[130px] w-fit text-white font-medium">
+          <div className="w-[100px] h-[100px] md:w-[140px] md:h-[140px] overflow-hidden bg-[#686868] rounded-full shadow-xl shadow-black">
+            <img
+              src={usernameData?.profile_image?.large}
+              alt="avatar"
+              className="w-full h-full object-cover"
+            />
+          </div>
           <div>
-            <h1 className="text-3xl">Profile Name</h1>
-            <div className="flex gap-2">
-              <p>Username</p>
-              <p>0 Followers</p>
-              <p>0 Following</p>
+            <h1 className="text-3xl">{usernameData?.name}</h1>
+            <div className="flex fl gap-8">
+              <p>@{usernameData?.username}</p>
+              <p>{usernameData?.followers_count} Followers</p>
+              <p>{usernameData?.following_count} Following</p>
             </div>
           </div>
         </div>

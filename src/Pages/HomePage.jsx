@@ -5,6 +5,7 @@ import Header from '../components/Header/Header'
 import PhotoGallery from '../components/PhotoGallery/PhotoGallery'
 import Popup from '../components/Popup/Popup'
 import { MdKeyboardDoubleArrowUp } from 'react-icons/md'
+import bg from '../assets/bg.jpeg'
 
 const HomePage = ({ comName }) => {
   const [photos, setPhotos] = useState([])
@@ -116,7 +117,9 @@ const HomePage = ({ comName }) => {
           <div
             className="hero_bannar"
             style={{
-              background: `linear-gradient( #00000060, #000000c7), url('${photos[16]?.urls?.regular}')`,
+              background: `linear-gradient( #00000060, #000000c7), url('${
+                comName === 'Random' ? bg : photos[16]?.urls?.regular
+              }')`,
             }}
           >
             <div className="hero_banner_text">
