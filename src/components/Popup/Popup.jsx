@@ -1,8 +1,13 @@
 /* eslint-disable react/prop-types */
 
 import './Popup.css'
+import { saveAs } from 'file-saver'
 
 const Popup = ({ handlePopup }) => {
+  const downloadImage = (image_url, image_name) => {
+    saveAs(image_url, image_name) // Put your image URL here.
+  }
+
   return (
     <div>
       {handlePopup?.id && (
@@ -15,15 +20,18 @@ const Popup = ({ handlePopup }) => {
             />
           </div>
           <div className="downloadImage">
-            <a
-              download
-              rel="noreferrer"
-              target="_blank"
+            <button
+              className="downloadButton cursor-pointer"
               title="Download photo"
-              href={handlePopup?.links?.download}
+              onClick={() =>
+                downloadImage(
+                  handlePopup?.urls?.regular,
+                  handlePopup?.description
+                )
+              }
             >
               Download
-            </a>
+            </button>
           </div>
           <div className="userInfo">
             <img src={handlePopup?.user?.profile_image?.medium} alt="user" />
