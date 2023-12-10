@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react'
-import { MdKeyboardDoubleArrowUp } from 'react-icons/md'
 import { useParams } from 'react-router-dom'
 import Header from '../components/Header/Header'
 import PhotoGallery from '../components/PhotoGallery/PhotoGallery'
@@ -12,8 +11,7 @@ const ProfilePage = () => {
   const [popupArry, setPopupArry] = useState([])
   const [toggle, setToggle] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [showScrollToTop, setShowScrollToTop] = useState(false)
+
   const { username } = useParams()
   const [usernameData, setUsernameData] = useState({})
 
@@ -27,29 +25,26 @@ const ProfilePage = () => {
       setUsernameData(data)
     }
 
-    fetchUser()
-  }, [username])
+    const fetchMoreData = async () => {
+      setLoading(true)
 
-  const fetchMoreData = async () => {
-    setLoading(true)
-    const nextPage = currentPage + 1
+      try {
+        const url = `https://api.unsplash.com/users/${username}/photos?&per_page=100&client_id=7rZCr4g4T9pmpdZ9Chw8B60qfv6PotjqGkXE6uMAUyM`
+        const response = await fetch(url)
+        const newData = await response.json()
+        // console.log(newData)
 
-    try {
-      const url = `https://api.unsplash.com/users/${username}/photos?page=${nextPage}&per_page=100&client_id=7rZCr4g4T9pmpdZ9Chw8B60qfv6PotjqGkXE6uMAUyM`
-      const response = await fetch(url)
-      const newData = await response.json()
-      console.log(newData)
-
-      if (newData.length > 0) {
-        setPhotos((prevPhotos) => [...prevPhotos, ...newData])
-        setCurrentPage(nextPage)
+        setPhotos(newData)
+      } catch (error) {
+        console.error('Error fetching more data', error)
+      } finally {
+        setLoading(false)
       }
-    } catch (error) {
-      console.error('Error fetching more data', error)
-    } finally {
-      setLoading(false)
     }
-  }
+
+    fetchUser()
+    fetchMoreData()
+  }, [username])
 
   const handlePopup = (event) => {
     let id = event?.target?.getAttribute('id')
@@ -62,30 +57,6 @@ const ProfilePage = () => {
     setToggle(false)
   }
 
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
-    ) {
-      fetchMoreData()
-    }
-
-    setShowScrollToTop(document.documentElement.scrollTop > 100)
-  }
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    })
-  }
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll)
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
   return (
     <>
       <Header />
@@ -305,15 +276,6 @@ const ProfilePage = () => {
         <div onClick={handleHide} className="popudp">
           <Popup handlePopup={popupArry} />
         </div>
-      )}
-
-      {showScrollToTop && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-4 right-4 bg-blue-500 text-white p-2 rounded"
-        >
-          <MdKeyboardDoubleArrowUp size={30} />
-        </button>
       )}
     </>
   )
