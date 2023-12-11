@@ -3,6 +3,7 @@
 import './Popup.css'
 import { saveAs } from 'file-saver'
 import { Link } from 'react-router-dom'
+import Comment from '../Reactions/Comment'
 
 const Popup = ({ handlePopup, handleHide }) => {
   const downloadImage = (image_url, image_name) => {
@@ -105,6 +106,7 @@ const Popup = ({ handlePopup, handleHide }) => {
               </button>
             </div>
           </div>
+          <Comment></Comment>
         </div>
       )}
     </div>
